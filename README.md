@@ -102,7 +102,9 @@ VIDEO_ON_FAILURE=true
 TRACE_ON_RETRY=true
 ```
 
-### 3. Gmail API Setup
+### 3. Gmail API Setup (Required for Login Tests)
+
+**⚠️ Important**: Gmail API setup is required to run login tests. Without this setup, tests will fail.
 
 1. **Create Google Cloud Project:**
 
@@ -131,6 +133,21 @@ TRACE_ON_RETRY=true
    ```
    - Follow the prompts to authorize the application
    - This will create `token.json` file
+
+5. **Create .env file:**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your actual values
+   ```
+
+### 4. Alternative: Run Tests Without Gmail API
+
+If you don't want to setup Gmail API, you can run tests that don't require login:
+
+```bash
+# Run only page navigation tests (without login)
+npx playwright test tests/planning-page.spec.ts --grep "Should verify Planning page elements"
+```
 
 ## 🧪 Running Tests
 
