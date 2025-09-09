@@ -1,0 +1,61 @@
+import { BasePage } from './base-page';
+import { PlanningPageLocators } from '../locators';
+
+/**
+ * Planning Page class with Chain Pattern methods
+ */
+export class PlanningPage extends BasePage {
+  private planningLocators: PlanningPageLocators;
+
+  constructor(page: any) {
+    super(page);
+    this.planningLocators = new PlanningPageLocators(page);
+  }
+
+  /**
+   * Navigate to Planning page (default after login)
+   * @returns this for method chaining
+   */
+  async goToPlanning(): Promise<this> {
+    console.log('📋 Navigating to Planning page...');
+    // Planning is default page after login, just verify
+    await this.planningLocators.mainScheduleText.waitFor({ timeout: 10000 });
+    const isMainScheduleVisible = await this.planningLocators.mainScheduleText.isVisible();
+    if (!isMainScheduleVisible) {
+      throw new Error('Planning page not loaded - Main Schedule text not visible');
+    }
+    console.log('✅ Successfully on Planning page');
+    return this;
+  }
+
+  /**
+   * Verify Planning page elements
+   * @returns this for method chaining
+   */
+  async verifyPlanningPage(): Promise<this> {
+    const isMainScheduleVisible = await this.planningLocators.mainScheduleText.isVisible();
+    if (!isMainScheduleVisible) {
+      throw new Error('Planning page verification failed - Main Schedule text not visible');
+    }
+    console.log('✅ Planning page verified - Main Schedule text is visible');
+    return this;
+  }
+
+  /**
+   * Navigate to Planning and verify in one step
+   * @returns this for method chaining
+   */
+  async goToPlanningAndVerify(): Promise<this> {
+    await this.goToPlanning();
+    await this.verifyPlanningPage();
+    return this;
+  }
+
+  /**
+   * Get planning locators for advanced operations
+   * @returns PlanningPageLocators instance
+   */
+  getLocators(): PlanningPageLocators {
+    return this.planningLocators;
+  }
+}

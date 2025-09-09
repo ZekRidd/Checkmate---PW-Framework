@@ -1,0 +1,62 @@
+services:
+  checkmate-tests:
+    build: .
+    container_name: checkmate-test-runner
+    volumes:
+      # Mount test results directory
+      - ./test-results:/app/test-results
+      - ./playwright-report:/app/playwright-report
+      # Mount environment file (if exists)
+      - ./.env:/app/.env:ro
+      # Mount Gmail credentials
+      - ./credentials.json:/app/credentials.json:ro
+      - ./token.json:/app/token.json:ro
+    environment:
+      # Override environment variables if needed
+      - NODE_ENV=production
+      - HEADLESS_MODE=true
+      - DOCKER=1
+    networks:
+      - checkmate-network
+    # Keep container running for interactive use
+    tty: true
+    stdin_open: true
+
+  # Optional: Add a service for running specific test suites
+  planning-tests:
+    build: .
+    container_name: checkmate-planning-tests
+    command: ["npm", "run", "test:planning"]
+    volumes:
+      - ./test-results:/app/test-results
+      - ./playwright-report:/app/playwright-report
+      - ./.env:/app/.env:ro
+      - ./credentials.json:/app/credentials.json:ro
+      - ./token.json:/app/token.json:ro
+    environment:
+      - NODE_ENV=production
+      - HEADLESS_MODE=true
+      - DOCKER=1
+    networks:
+      - checkmate-network
+
+  configuration-tests:
+    build: .
+    container_name: checkmate-configuration-tests
+    command: ["npm", "run", "test:configuration"]
+    volumes:
+      - ./test-results:/app/test-results
+      - ./playwright-report:/app/playwright-report
+      - ./.env:/app/.env:ro
+      - ./credentials.json:/app/credentials.json:ro
+      - ./token.json:/app/token.json:ro
+    environment:
+      - NODE_ENV=production
+      - HEADLESS_MODE=true
+      - DOCKER=1
+    networks:
+      - checkmate-network
+
+networks:
+  checkmate-network:
+    driver: bridge
