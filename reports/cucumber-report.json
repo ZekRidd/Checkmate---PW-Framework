@@ -1,0 +1,114 @@
+[
+  {
+    "description": "  As a user\n  I want to login to Checkmate\n  So that I can access the application",
+    "elements": [
+      {
+        "description": "",
+        "id": "checkmate-authentication;successful-login-with-valid-credentials",
+        "keyword": "Scenario",
+        "line": 8,
+        "name": "Successful login with valid credentials",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1025794250
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "I am on the Checkmate login page",
+            "match": {
+              "location": "features/auth/login.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 629917125
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 10,
+            "name": "I enter valid credentials",
+            "match": {
+              "location": "features/auth/login.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10684749749
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "I should be successfully logged in",
+            "match": {
+              "location": "features/auth/login.steps.js:18"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2839250
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "I should be on the planning page",
+            "match": {
+              "location": "features/auth/login.steps.js:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 762541
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 164074542
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@auth",
+            "line": 1
+          },
+          {
+            "name": "@smoke",
+            "line": 1
+          },
+          {
+            "name": "@login-success",
+            "line": 7
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "checkmate-authentication",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Checkmate Authentication",
+    "tags": [
+      {
+        "name": "@auth",
+        "line": 1
+      },
+      {
+        "name": "@smoke",
+        "line": 1
+      }
+    ],
+    "uri": "features/auth/login.feature"
+  }
+]

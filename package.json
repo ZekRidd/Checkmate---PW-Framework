@@ -4,20 +4,27 @@
   "description": "Test framework with Playwright and TypeScript",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test",
-    "test:headed": "npx playwright test --headed",
-    "test:login": "npx playwright test tests/login-and-navigation.spec.ts",
-    "setup": "npm install && cp .env.example .env"
-  },
+      "test": "npx playwright test",
+      "test:headed": "npx playwright test --headed",
+      "test:login": "npx playwright test tests/login-and-navigation.spec.ts",
+      "test:cucumber": "cucumber-js",
+      "test:cucumber:auth": "cucumber-js --tags @auth",
+      "test:cucumber:navigation": "cucumber-js --tags @navigation",
+      "test:cucumber:smoke": "cucumber-js --tags @smoke",
+      "setup": "npm install && cp .env.example .env"
+    },
   "keywords": [
     "playwright",
     "typescript",
     "pom",
-    "testing"
+    "testing",
+    "cucumber",
+    "bdd"
   ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@cucumber/cucumber": "^10.9.0",
     "@playwright/test": "^1.40.0",
     "@types/node": "^20.0.0",
     "ts-node": "^10.9.0",
