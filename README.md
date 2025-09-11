@@ -6,7 +6,7 @@ A comprehensive test automation framework built with Playwright and TypeScript, 
 
 - **Page Object Model (POM)** - Clean, maintainable test structure
 - **Environment-based Configuration** - Centralized configuration management
-- **Gmail API Integration** - Automated email verification code retrieval
+- **Username/Password Authentication** - Simple and secure login
 - **TypeScript Support** - Type-safe development
 - **Docker Support** - Run tests anywhere with Docker
 - **Multiple Test Suites** - Modular test organization
@@ -36,7 +36,6 @@ Checkmate/
 │   │   ├── data-management-page.ts # Data Management page
 │   │   └── index.ts                # Page exports
 │   └── utils/
-│       ├── gmail-helper.ts         # Gmail API integration
 │       └── login-helper.ts         # Login utility functions
 ├── tests/
 │   ├── login-and-navigation.spec.ts    # Login and navigation tests
@@ -47,7 +46,6 @@ Checkmate/
 ├── Dockerfile                      # Docker container definition
 ├── DOCKER.md                       # Docker usage guide
 ├── playwright.config.ts            # Playwright configuration
-├── setup-gmail.ts                  # Gmail API setup script
 ├── .env                            # Environment variables (not in git)
 └── package.json                    # Dependencies and scripts
 ```
@@ -79,14 +77,11 @@ TEST_EMAIL=your-test-email@gmail.com
 TEST_USER_NAME=Test User
 TEST_USER_ROLE=user
 
-# Gmail API Configuration
-GMAIL_SENDER_EMAIL=your-sender-email@domain.com
-GMAIL_CREDENTIALS_FILE=credentials.json
-GMAIL_TOKEN_FILE=token.json
+# Username/Password Credentials
+USERNAME=your-username@domain.com
+PASSWORD=your-password
 
 # Test Configuration
-EMAIL_WAIT_TIME_MS=10000
-CODE_WAIT_MINUTES=1
 MAX_RETRY_ATTEMPTS=3
 TEST_TIMEOUT_MS=60000
 
@@ -102,51 +97,13 @@ VIDEO_ON_FAILURE=true
 TRACE_ON_RETRY=true
 ```
 
-### 3. Gmail API Setup (Required for Login Tests)
+### 3. Environment Configuration
 
-**⚠️ Important**: Gmail API setup is required to run login tests. Without this setup, tests will fail.
-
-1. **Create Google Cloud Project:**
-
-   - Go to [Google Cloud Console](https://console.cloud.google.com/)
-   - Create a new project or select existing one
-   - Enable Gmail API
-
-2. **Create OAuth 2.0 Credentials:**
-
-   - Go to "Credentials" → "Create Credentials" → "OAuth 2.0 Client ID"
-   - Choose "Desktop application"
-   - Download the credentials JSON file
-   - Rename it to `credentials.json` and place in project root
-
-3. **Configure OAuth Consent Screen:**
-
-   - Go to "OAuth consent screen"
-   - Set User Type to "External"
-   - Add app name, support email, and developer contact
-   - Add scopes: `https://www.googleapis.com/auth/gmail.readonly`
-   - Add test users (your Gmail address)
-
-4. **Setup Gmail API:**
-   ```bash
-   npm run setup-gmail
-   ```
-   - Follow the prompts to authorize the application
-   - This will create `token.json` file
-
-5. **Create .env file:**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your actual values
-   ```
-
-### 4. Alternative: Run Tests Without Gmail API
-
-If you don't want to setup Gmail API, you can run tests that don't require login:
+Create `.env` file with your configuration:
 
 ```bash
-# Run only page navigation tests (without login)
-npx playwright test tests/planning-page.spec.ts --grep "Should verify Planning page elements"
+cp .env.example .env
+# Edit .env with your actual values
 ```
 
 ## 🧪 Running Tests
@@ -162,26 +119,16 @@ npm run test:headed
 
 # Run specific test suites
 npm run test:login
-npm run test:planning
-npm run test:configuration
-npm run test:data-management
 ```
 
 ### Docker Testing
 
 ```bash
 # Build Docker image
-npm run docker:build
+docker build -t checkmate-tests .
 
-# Run all tests in Docker
-npm run docker:run
-
-# Run specific test suite in Docker
-docker-compose up planning-tests
-docker-compose up configuration-tests
-
-# Interactive Docker session
-npm run docker:interactive
+# Run tests in Docker
+docker run --rm checkmate-tests
 ```
 
 ## 📝 Test Structure
@@ -249,7 +196,7 @@ All configuration is managed through environment variables:
 
 - **Application URLs**: Base URL, login URL, dashboard URL
 - **Test Credentials**: Email, user name, role
-- **Gmail API**: Sender email, credentials file, token file
+- **Username/Password**: Login credentials
 - **Test Settings**: Wait times, retry attempts, timeouts
 - **Browser Settings**: Headless mode, viewport size
 - **Reporting**: Screenshot, video, trace settings
@@ -258,7 +205,7 @@ All configuration is managed through environment variables:
 
 - **Personal information** is stored in `.env` file (not in git)
 - **Environment.ts** contains no personal data
-- **Gmail credentials** are mounted as volumes in Docker
+- **Login credentials** are stored securely in environment variables
 
 ## 📊 Reporting
 
@@ -328,6 +275,7 @@ For issues and questions:
 
 1. Check the [DOCKER.md](DOCKER.md) for Docker-related issues
 2. Review environment configuration
-3. Ensure Gmail API setup is correct
+3. Ensure login credentials are correct
 4. Check test logs and reports
+
 # Checkmate

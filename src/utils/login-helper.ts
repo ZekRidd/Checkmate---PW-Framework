@@ -1,5 +1,4 @@
 import { Page } from '@playwright/test';
-import { GmailHelper } from './gmail-helper';
 import { environment } from '../config/environment';
 import { BaseLocators } from '../locators/BaseLocators';
 
@@ -8,14 +7,12 @@ import { BaseLocators } from '../locators/BaseLocators';
  * Provides a centralized login function for Checkmate application
  */
 export class LoginHelper {
-  private gmailHelper: GmailHelper;
-
   constructor() {
-    this.gmailHelper = new GmailHelper();
+    // Constructor for future extensions
   }
 
   /**
-   * Perform login to Checkmate application
+   * Login with Username and Password
    * @param page - Playwright page object
    * @param options - Login options
    * @returns Promise<void>
@@ -23,98 +20,70 @@ export class LoginHelper {
   async loginToCheckmate(
     page: Page, 
     options: {
-      email?: string;
-      waitForEmail?: number;
-      waitForCode?: number;
-      skipGmailSetup?: boolean;
+      username?: string;
+      password?: string;
       locators?: {
         usernameInput?: string;
+        passwordInput?: string;
         continueButton?: string;
-        verificationCodeInput?: string;
       };
     } = {}
   ): Promise<void> {
     try {
       console.log('🚀 Starting Checkmate login process...');
 
-      // Use provided email or environment default
-      const testEmail = options.email || environment.getTestEmail();
-      console.log(`📧 Using email: ${testEmail}`);
-
-      // Setup Gmail API if not skipped
-      if (!options.skipGmailSetup) {
-        console.log('🔗 Setting up Gmail API connection...');
-        const connected = await this.gmailHelper.connect();
-        
-        if (!connected) {
-          throw new Error('Gmail API connection failed');
-        }
-        console.log('✅ Gmail API connected successfully');
-      }
+      // Username/Password login process
+      const username = options.username || environment.getUsername();
+      const password = options.password || environment.getPassword();
+      console.log(`👤 Using username: ${username}`);
+      console.log(`🔐 Using password: ${password ? '***' : 'NOT SET'}`);
 
       // Navigate to Checkmate application
       console.log(`🌐 Navigating to: ${environment.getBaseUrl()}`);
       await page.goto(environment.getBaseUrl());
 
-      // Define locators - use default locators if not provided
+      // Define locators for username/password login
       const usernameInput = options.locators?.usernameInput || '#username';
+      const passwordInput = options.locators?.passwordInput || '#password';
       const continueButton = options.locators?.continueButton || 'button[type="submit"]:has-text("Continue")';
-      const verificationCodeInput = options.locators?.verificationCodeInput || 'input[type="text"]:not(.hide)';
 
-      // Enter email address
-      console.log('📝 Entering email address...');
-      await page.fill(usernameInput, testEmail);
+      // Step 1: Enter username/email
+      console.log('📝 Entering username/email...');
+      await page.fill(usernameInput, username);
+
+      // Step 2: Click Continue
+      console.log('🔄 Clicking Continue button...');
       await page.click(continueButton);
 
-      // Wait for email to be sent
-      const emailWaitTime = options.waitForEmail || environment.getEmailWaitTime();
-      console.log(`⏳ Waiting ${emailWaitTime / 1000} seconds for email to be sent...`);
-      await page.waitForTimeout(emailWaitTime);
+      // Wait for password field to appear
+      console.log('⏳ Waiting for password field...');
+      await page.waitForTimeout(2000);
 
-      // Get verification code from Gmail
-      if (!options.skipGmailSetup) {
-        console.log('📧 Retrieving verification code from Gmail...');
-        const codeWaitMinutes = options.waitForCode || environment.getCodeWaitMinutes();
-        const verificationCode: string = await this.gmailHelper.waitForCode(
-          environment.getGmailSenderEmail(),
-          codeWaitMinutes
-        );
-        
-        console.log(`📨 Received verification code: ${verificationCode}`);
+      // Step 3: Enter password
+      console.log('🔐 Entering password...');
+      await page.fill(passwordInput, password);
 
-        // Enter verification code
-        console.log('🔢 Entering verification code...');
-        await page.fill(verificationCodeInput, verificationCode);
-        await page.click(continueButton);
+      // Step 4: Click Continue (after password)
+      console.log('🔄 Clicking Continue button (after password)...');
+      await page.click(continueButton);
 
-        // Wait for page to load and verify login success
-        console.log('⏳ Waiting for page to load...');
-        await page.waitForTimeout(5000);
-        
-        // Check if we need to click "Continue" again
-        const additionalContinueButton = page.locator('button:has-text("Continue")');
-        if (await additionalContinueButton.isVisible()) {
-          console.log('🔄 Clicking Continue button again...');
-          await additionalContinueButton.click();
-          await page.waitForTimeout(3000);
-        }
+      // Wait for page to load
+      console.log('⏳ Waiting for page to load...');
+      await page.waitForTimeout(5000);
 
-        // Verify successful login
-        const currentUrl = page.url();
-        console.log(`🔗 Current URL after login: ${currentUrl}`);
+      // Verify successful login
+      const currentUrl = page.url();
+      console.log(`🔗 Current URL after login: ${currentUrl}`);
 
-        // More flexible login check - if we're not on login page, consider it successful
-        const isLoggedIn = !currentUrl.includes('/login') || currentUrl.includes('auth.thegrain.pro');
+      // More flexible login check - if we're not on login page, consider it successful
+      const isLoggedIn = !currentUrl.includes('/login') || currentUrl.includes('auth.thegrain.pro');
 
-        if (isLoggedIn) {
-          console.log('✅ Login successful! User is redirected to main area.');
-        } else {
-          console.log('❌ Login may have failed. Still on login page or no redirect detected.');
-          await page.screenshot({ path: 'login-failed.png' });
-          throw new Error('Login failed - no redirect detected');
-        }
+      if (isLoggedIn) {
+        console.log('✅ Login successful! User is redirected to main area.');
       } else {
-        console.log('⚠️ Gmail setup skipped - manual code entry required');
+        console.log('❌ Login may have failed. Still on login page or no redirect detected.');
+        await page.screenshot({ path: 'login-failed.png' });
+        throw new Error('Login failed - no redirect detected');
       }
 
       console.log('🎉 Login process completed successfully!');
@@ -135,26 +104,24 @@ export class LoginHelper {
   }
 
   /**
-   * Login with custom email
+   * Login with custom username
    * @param page - Playwright page object
-   * @param email - Custom email address
+   * @param username - Custom username
    * @returns Promise<void>
    */
-  async loginWithEmail(page: Page, email: string): Promise<void> {
-    await this.loginToCheckmate(page, { email });
+  async loginWithUsername(page: Page, username: string): Promise<void> {
+    await this.loginToCheckmate(page, { username });
   }
 
   /**
-   * Login without Gmail API (for manual testing)
+   * Login with custom username and password
    * @param page - Playwright page object
-   * @param email - Email address
+   * @param username - Username
+   * @param password - Password
    * @returns Promise<void>
    */
-  async loginWithoutGmail(page: Page, email?: string): Promise<void> {
-    await this.loginToCheckmate(page, { 
-      email: email || environment.getTestEmail(),
-      skipGmailSetup: true 
-    });
+  async loginWithCredentials(page: Page, username: string, password: string): Promise<void> {
+    await this.loginToCheckmate(page, { username, password });
   }
 
   /**
@@ -168,17 +135,26 @@ export class LoginHelper {
   }
 
   /**
-   * Check if user is logged in by verifying Main Schedule text is visible
+   * Check if user is logged in by verifying URL and navigation
    * @param page - Playwright page object
    * @returns Promise<boolean>
    */
   async isLoggedInByMainSchedule(page: Page): Promise<boolean> {
     try {
-      const mainScheduleLocator = page.locator('text="Main Schedule"');
-      await mainScheduleLocator.waitFor({ timeout: 10000 });
-      return await mainScheduleLocator.isVisible();
+      const currentUrl = page.url();
+      // Check if we're on planning page (default after login)
+      const isOnPlanningPage = currentUrl.includes('/planning/');
+      
+      if (isOnPlanningPage) {
+        // Also check if navigation menu is visible
+        const navigationLocator = page.locator('nav, .navigation, .menu, .navbar');
+        const isNavigationVisible = await navigationLocator.isVisible();
+        return isNavigationVisible;
+      }
+      
+      return false;
     } catch (error) {
-      console.log('❌ Main Schedule text not found or not visible');
+      console.log('❌ Login verification failed:', error);
       return false;
     }
   }

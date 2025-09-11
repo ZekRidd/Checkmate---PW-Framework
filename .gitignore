@@ -29,7 +29,7 @@ build/
 .env.test.local
 .env.production.local
 
-# Gmail API credentials and tokens
+# API credentials and tokens
 credentials.json
 token.json
 

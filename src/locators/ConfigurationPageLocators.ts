@@ -7,33 +7,25 @@ import { BaseLocators } from './BaseLocators';
  */
 export class ConfigurationPageLocators extends BaseLocators {
   // Page identification
-  public readonly pageTitle: Locator;
-  public readonly pageSubtitle: Locator;
-  public readonly breadcrumb: Locator;
-  public readonly assetsText: Locator;
-  public readonly addAssetButton: Locator;
+  public readonly configurationPageTitle: Locator;
+  public readonly configurationPageSubtitle: Locator;
+  public readonly configurationPageBreadcrumb: Locator;
+  public readonly configurationPageAssetsText: Locator;
+  public readonly configurationPageAddAssetButton: Locator;
   
   // Configuration menu elements
-  public readonly storageAssetsMenuItem: Locator;
-  public readonly assetPathsMenuItem: Locator;
+  public readonly configurationPageStorageAssetsMenuItem: Locator;
+  public readonly configurationPageAssetPathsMenuItem: Locator;
 
   // Navigation elements
-  public readonly navigationMenu: Locator;
-  public readonly planningTab: Locator;
-  public readonly configurationTab: Locator;
-  public readonly dataManagementTab: Locator;
-  public readonly userMenu: Locator;
-  public readonly logoutButton: Locator;
+  public readonly configurationPageNavigationMenu: Locator;
+  public readonly configurationPagePlanningTab: Locator;
+  public readonly configurationPageConfigurationTab: Locator;
+  public readonly configurationPageDataManagementTab: Locator;
+  public readonly configurationPageUserMenu: Locator;
+  public readonly configurationPageLogoutButton: Locator;
 
-  // Configuration sections
-  public readonly configurationContainer: Locator;
-  public readonly configurationTabs: Locator;
-  public readonly generalSettingsTab: Locator;
-  public readonly userManagementTab: Locator;
-  public readonly systemSettingsTab: Locator;
-  public readonly integrationsTab: Locator;
-  public readonly notificationsTab: Locator;
-  public readonly securityTab: Locator;
+  // Configuration sections (simplified - only used elements)
 
   // General Settings
   public readonly generalSettingsSection: Locator;
@@ -84,10 +76,8 @@ export class ConfigurationPageLocators extends BaseLocators {
   public readonly maxFileSizeInput: Locator;
   public readonly sessionTimeoutInput: Locator;
 
-  // Integrations
+  // Integrations (simplified - no Gmail API)
   public readonly integrationsSection: Locator;
-  public readonly gmailIntegrationToggle: Locator;
-  public readonly gmailCredentialsInput: Locator;
   public readonly slackIntegrationToggle: Locator;
   public readonly slackWebhookInput: Locator;
   public readonly jiraIntegrationToggle: Locator;
@@ -178,33 +168,25 @@ export class ConfigurationPageLocators extends BaseLocators {
     super(page);
     
     // Page identification
-    this.pageTitle = this.page.locator('h1, .page-title, .configuration-title, [data-testid="configuration-title"]');
-    this.pageSubtitle = this.page.locator('h2, .page-subtitle, .configuration-subtitle, [data-testid="configuration-subtitle"]');
-    this.breadcrumb = this.getBreadcrumb();
-    this.assetsText = this.getAssetsText();
-    this.addAssetButton = this.getAddAssetButton();
+    this.configurationPageTitle = this.page.locator('h1, .page-title, .configuration-title, [data-testid="configuration-title"]');
+    this.configurationPageSubtitle = this.page.locator('h2, .page-subtitle, .configuration-subtitle, [data-testid="configuration-subtitle"]');
+    this.configurationPageBreadcrumb = this.getBreadcrumb();
+    this.configurationPageAssetsText = this.getAssetsText();
+    this.configurationPageAddAssetButton = this.getAddAssetButton();
     
     // Configuration menu elements
-    this.storageAssetsMenuItem = this.page.locator('text=/Storage Assets/i');
-    this.assetPathsMenuItem = this.page.locator('text=/Asset Paths/i');
+    this.configurationPageStorageAssetsMenuItem = this.page.locator('text=/Storage Assets/i');
+    this.configurationPageAssetPathsMenuItem = this.page.locator('text=/Asset Paths/i');
 
     // Navigation elements
-    this.navigationMenu = this.getNavigationMenu();
-    this.planningTab = this.page.locator('a:has-text("Planning"), button:has-text("Planning")');
-    this.configurationTab = this.page.locator('a:has-text("Configuration"), button:has-text("Configuration")');
-    this.dataManagementTab = this.page.locator('a:has-text("Data Management"), button:has-text("Data Management")');
-    this.userMenu = this.page.locator('.user-menu, .profile-menu, [data-testid="user-menu"]');
-    this.logoutButton = this.page.locator('button:has-text("Logout"), .logout-btn, [data-testid="logout-button"]');
+    this.configurationPageNavigationMenu = this.getNavigationMenu();
+    this.configurationPagePlanningTab = this.page.locator('a:has-text("Planning"), button:has-text("Planning")');
+    this.configurationPageConfigurationTab = this.page.locator('a:has-text("Configuration"), button:has-text("Configuration")');
+    this.configurationPageDataManagementTab = this.page.locator('a:has-text("Data Management"), button:has-text("Data Management")');
+    this.configurationPageUserMenu = this.page.locator('.user-menu, .profile-menu, [data-testid="user-menu"]');
+    this.configurationPageLogoutButton = this.page.locator('button:has-text("Logout"), .logout-btn, [data-testid="logout-button"]');
 
-    // Configuration sections
-    this.configurationContainer = this.page.locator('.configuration-container, .configuration-content, [data-testid="configuration-container"]');
-    this.configurationTabs = this.page.locator('.configuration-tabs, .config-tabs, [data-testid="configuration-tabs"]');
-    this.generalSettingsTab = this.page.locator('a:has-text("General"), .tab-general, [data-testid="general-settings-tab"]');
-    this.userManagementTab = this.page.locator('a:has-text("Users"), .tab-users, [data-testid="user-management-tab"]');
-    this.systemSettingsTab = this.page.locator('a:has-text("System"), .tab-system, [data-testid="system-settings-tab"]');
-    this.integrationsTab = this.page.locator('a:has-text("Integrations"), .tab-integrations, [data-testid="integrations-tab"]');
-    this.notificationsTab = this.page.locator('a:has-text("Notifications"), .tab-notifications, [data-testid="notifications-tab"]');
-    this.securityTab = this.page.locator('a:has-text("Security"), .tab-security, [data-testid="security-tab"]');
+    // Configuration sections (simplified - only used elements)
 
     // General Settings
     this.generalSettingsSection = this.page.locator('.general-settings, .settings-general, [data-testid="general-settings"]');
@@ -255,10 +237,8 @@ export class ConfigurationPageLocators extends BaseLocators {
     this.maxFileSizeInput = this.page.locator('input[name="maxFileSize"], #max-file-size, [data-testid="max-file-size"]');
     this.sessionTimeoutInput = this.page.locator('input[name="sessionTimeout"], #session-timeout, [data-testid="session-timeout"]');
 
-    // Integrations
+    // Integrations (simplified - no Gmail API)
     this.integrationsSection = this.page.locator('.integrations, .integrations-section, [data-testid="integrations"]');
-    this.gmailIntegrationToggle = this.page.locator('input[type="checkbox"][name="gmailIntegration"], [data-testid="gmail-integration"]');
-    this.gmailCredentialsInput = this.page.locator('input[name="gmailCredentials"], #gmail-credentials, [data-testid="gmail-credentials"]');
     this.slackIntegrationToggle = this.page.locator('input[type="checkbox"][name="slackIntegration"], [data-testid="slack-integration"]');
     this.slackWebhookInput = this.page.locator('input[name="slackWebhook"], #slack-webhook, [data-testid="slack-webhook"]');
     this.jiraIntegrationToggle = this.page.locator('input[type="checkbox"][name="jiraIntegration"], [data-testid="jira-integration"]');
@@ -346,29 +326,7 @@ export class ConfigurationPageLocators extends BaseLocators {
     this.backupActionsColumn = this.page.locator('.backup-actions, .config-backup-actions, [data-testid="backup-actions"]');
   }
 
-  // Configuration specific methods
-  public async switchToTab(tabName: 'general' | 'users' | 'system' | 'integrations' | 'notifications' | 'security'): Promise<void> {
-    switch (tabName) {
-      case 'general':
-        await this.clickElement(this.generalSettingsTab);
-        break;
-      case 'users':
-        await this.clickElement(this.userManagementTab);
-        break;
-      case 'system':
-        await this.clickElement(this.systemSettingsTab);
-        break;
-      case 'integrations':
-        await this.clickElement(this.integrationsTab);
-        break;
-      case 'notifications':
-        await this.clickElement(this.notificationsTab);
-        break;
-      case 'security':
-        await this.clickElement(this.securityTab);
-        break;
-    }
-  }
+  // Configuration specific methods (simplified - only used elements)
 
   public async updateGeneralSettings(settings: {
     applicationName?: string;
@@ -472,24 +430,13 @@ export class ConfigurationPageLocators extends BaseLocators {
     await this.clickElement(this.confirmButton);
   }
 
-  public async configureIntegration(integration: 'gmail' | 'slack' | 'jira', config: {
+  public async configureIntegration(integration: 'slack' | 'jira', config: {
     enabled: boolean;
-    credentials?: string;
     webhook?: string;
     url?: string;
     token?: string;
   }): Promise<void> {
     switch (integration) {
-      case 'gmail':
-        if (config.enabled) {
-          await this.checkCheckbox(this.gmailIntegrationToggle);
-          if (config.credentials) {
-            await this.fillInput(this.gmailCredentialsInput, config.credentials);
-          }
-        } else {
-          await this.uncheckCheckbox(this.gmailIntegrationToggle);
-        }
-        break;
       case 'slack':
         if (config.enabled) {
           await this.checkCheckbox(this.slackIntegrationToggle);

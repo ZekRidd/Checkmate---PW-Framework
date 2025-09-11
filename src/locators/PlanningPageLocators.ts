@@ -7,36 +7,36 @@ import { BaseLocators } from './BaseLocators';
  */
 export class PlanningPageLocators extends BaseLocators {
   // Page identification
-  public readonly pageTitle: Locator;
-  public readonly pageSubtitle: Locator;
-  public readonly breadcrumb: Locator;
-  public readonly mainScheduleText: Locator;
+  public readonly planningPageTitle: Locator;
+  public readonly planningPageSubtitle: Locator;
+  public readonly planningPageBreadcrumb: Locator;
+  public readonly planningPageMainScheduleText: Locator;
 
   // Navigation elements
-  public readonly navigationMenu: Locator;
-  public readonly planningTab: Locator;
-  public readonly configurationTab: Locator;
-  public readonly dataManagementTab: Locator;
-  public readonly userMenu: Locator;
-  public readonly logoutButton: Locator;
+  public readonly planningPageNavigationMenu: Locator;
+  public readonly planningPagePlanningTab: Locator;
+  public readonly planningPageConfigurationTab: Locator;
+  public readonly planningPageDataManagementTab: Locator;
+  public readonly planningPageUserMenu: Locator;
+  public readonly planningPageLogoutButton: Locator;
 
   // Planning specific elements
-  public readonly planningContainer: Locator;
-  public readonly cycleSelector: Locator;
-  public readonly cycleDropdown: Locator;
-  public readonly cycleList: Locator;
-  public readonly currentCycle: Locator;
-  public readonly cycleName: Locator;
-  public readonly cycleDateRange: Locator;
-  public readonly cycleStatus: Locator;
+  public readonly planningPageContainer: Locator;
+  public readonly planningPageCycleSelector: Locator;
+  public readonly planningPageCycleDropdown: Locator;
+  public readonly planningPageCycleList: Locator;
+  public readonly planningPageCurrentCycle: Locator;
+  public readonly planningPageCycleName: Locator;
+  public readonly planningPageCycleDateRange: Locator;
+  public readonly planningPageCycleStatus: Locator;
 
   // Planning actions
-  public readonly createNewPlanButton: Locator;
-  public readonly editPlanButton: Locator;
-  public readonly deletePlanButton: Locator;
-  public readonly duplicatePlanButton: Locator;
-  public readonly exportPlanButton: Locator;
-  public readonly importPlanButton: Locator;
+  public readonly planningPageCreateNewPlanButton: Locator;
+  public readonly planningPageEditPlanButton: Locator;
+  public readonly planningPageDeletePlanButton: Locator;
+  public readonly planningPageDuplicatePlanButton: Locator;
+  public readonly planningPageExportPlanButton: Locator;
+  public readonly planningPageImportPlanButton: Locator;
 
   // Plan list/table
   public readonly planTable: Locator;
@@ -130,36 +130,36 @@ export class PlanningPageLocators extends BaseLocators {
     super(page);
     
     // Page identification
-    this.pageTitle = this.page.locator('h1, .page-title, .planning-title, [data-testid="planning-title"]');
-    this.pageSubtitle = this.page.locator('h2, .page-subtitle, .planning-subtitle, [data-testid="planning-subtitle"]');
-    this.breadcrumb = this.getBreadcrumb();
-    this.mainScheduleText = this.getMainScheduleText();
+    this.planningPageTitle = this.page.locator('h1, .page-title, .planning-title, [data-testid="planning-title"]');
+    this.planningPageSubtitle = this.page.locator('h2, .page-subtitle, .planning-subtitle, [data-testid="planning-subtitle"]');
+    this.planningPageBreadcrumb = this.getBreadcrumb();
+    this.planningPageMainScheduleText = this.getMainScheduleText();
 
     // Navigation elements
-    this.navigationMenu = this.getNavigationMenu();
-    this.planningTab = this.page.locator('a:has-text("Planning"), button:has-text("Planning")');
-    this.configurationTab = this.page.locator('a:has-text("Configuration"), button:has-text("Configuration")');
-    this.dataManagementTab = this.page.locator('a:has-text("Data Management"), button:has-text("Data Management")');
-    this.userMenu = this.page.locator('.user-menu, .profile-menu, [data-testid="user-menu"]');
-    this.logoutButton = this.page.locator('button:has-text("Logout"), .logout-btn, [data-testid="logout-button"]');
+    this.planningPageNavigationMenu = this.getNavigationMenu();
+    this.planningPagePlanningTab = this.page.locator('a:has-text("Planning"), button:has-text("Planning")');
+    this.planningPageConfigurationTab = this.page.locator('a:has-text("Configuration"), button:has-text("Configuration")');
+    this.planningPageDataManagementTab = this.page.locator('a:has-text("Data Management"), button:has-text("Data Management")');
+    this.planningPageUserMenu = this.page.locator('.user-menu, .profile-menu, [data-testid="user-menu"]');
+    this.planningPageLogoutButton = this.page.locator('button:has-text("Logout"), .logout-btn, [data-testid="logout-button"]');
 
     // Planning specific elements
-    this.planningContainer = this.page.locator('.planning-container, .planning-content, [data-testid="planning-container"]');
-    this.cycleSelector = this.page.locator('.cycle-selector, .cycle-dropdown, [data-testid="cycle-selector"]');
-    this.cycleDropdown = this.page.locator('select[name="cycle"], .cycle-select, [data-testid="cycle-dropdown"]');
-    this.cycleList = this.page.locator('.cycle-list, .cycle-items, [data-testid="cycle-list"]');
-    this.currentCycle = this.page.locator('.current-cycle, .active-cycle, [data-testid="current-cycle"]');
-    this.cycleName = this.page.locator('.cycle-name, .cycle-title, [data-testid="cycle-name"]');
-    this.cycleDateRange = this.page.locator('.cycle-date-range, .cycle-dates, [data-testid="cycle-date-range"]');
-    this.cycleStatus = this.page.locator('.cycle-status, .cycle-state, [data-testid="cycle-status"]');
+    this.planningPageContainer = this.page.locator('.planning-container, .planning-content, [data-testid="planning-container"]');
+    this.planningPageCycleSelector = this.page.locator('.cycle-selector, .cycle-dropdown, [data-testid="cycle-selector"]');
+    this.planningPageCycleDropdown = this.page.locator('select[name="cycle"], .cycle-select, [data-testid="cycle-dropdown"]');
+    this.planningPageCycleList = this.page.locator('.cycle-list, .cycle-items, [data-testid="cycle-list"]');
+    this.planningPageCurrentCycle = this.page.locator('.current-cycle, .active-cycle, [data-testid="current-cycle"]');
+    this.planningPageCycleName = this.page.locator('.cycle-name, .cycle-title, [data-testid="cycle-name"]');
+    this.planningPageCycleDateRange = this.page.locator('.cycle-date-range, .cycle-dates, [data-testid="cycle-date-range"]');
+    this.planningPageCycleStatus = this.page.locator('.cycle-status, .cycle-state, [data-testid="cycle-status"]');
 
     // Planning actions
-    this.createNewPlanButton = this.getAddButton();
-    this.editPlanButton = this.getEditButton();
-    this.deletePlanButton = this.getDeleteButton();
-    this.duplicatePlanButton = this.page.locator('button:has-text("Duplicate"), .duplicate-btn, [data-testid="duplicate-plan"]');
-    this.exportPlanButton = this.page.locator('button:has-text("Export"), .export-btn, [data-testid="export-plan"]');
-    this.importPlanButton = this.page.locator('button:has-text("Import"), .import-btn, [data-testid="import-plan"]');
+    this.planningPageCreateNewPlanButton = this.getAddButton();
+    this.planningPageEditPlanButton = this.getEditButton();
+    this.planningPageDeletePlanButton = this.getDeleteButton();
+    this.planningPageDuplicatePlanButton = this.page.locator('button:has-text("Duplicate"), .duplicate-btn, [data-testid="duplicate-plan"]');
+    this.planningPageExportPlanButton = this.page.locator('button:has-text("Export"), .export-btn, [data-testid="export-plan"]');
+    this.planningPageImportPlanButton = this.page.locator('button:has-text("Import"), .import-btn, [data-testid="import-plan"]');
 
     // Plan list/table
     this.planTable = this.getTable();
@@ -252,19 +252,19 @@ export class PlanningPageLocators extends BaseLocators {
 
   // Planning specific methods
   public async getCurrentCycleName(): Promise<string> {
-    return await this.getElementText(this.cycleName);
+    return await this.getElementText(this.planningPageCycleName);
   }
 
   public async getCurrentCycleStatus(): Promise<string> {
-    return await this.getElementText(this.cycleStatus);
+    return await this.getElementText(this.planningPageCycleStatus);
   }
 
   public async getCurrentCycleDateRange(): Promise<string> {
-    return await this.getElementText(this.cycleDateRange);
+    return await this.getElementText(this.planningPageCycleDateRange);
   }
 
   public async selectCycle(cycleName: string): Promise<void> {
-    await this.clickElement(this.cycleSelector);
+    await this.clickElement(this.planningPageCycleSelector);
     await this.clickElement(this.page.locator(`option:has-text("${cycleName}"), .cycle-item:has-text("${cycleName}")`));
   }
 
@@ -278,7 +278,7 @@ export class PlanningPageLocators extends BaseLocators {
     category?: string;
     tags?: string;
   }): Promise<void> {
-    await this.clickElement(this.createNewPlanButton);
+    await this.clickElement(this.planningPageCreateNewPlanButton);
     await this.fillInput(this.planNameInput, planData.name);
     
     if (planData.description) {

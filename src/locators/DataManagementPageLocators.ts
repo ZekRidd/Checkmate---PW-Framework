@@ -7,28 +7,20 @@ import { BaseLocators } from './BaseLocators';
  */
 export class DataManagementPageLocators extends BaseLocators {
   // Page identification
-  public readonly pageTitle: Locator;
-  public readonly pageSubtitle: Locator;
-  public readonly breadcrumb: Locator;
-  public readonly fileUploadsText: Locator;
+  public readonly dataManagementPageTitle: Locator;
+  public readonly dataManagementPageSubtitle: Locator;
+  public readonly dataManagementPageBreadcrumb: Locator;
+  public readonly dataManagementPageFileUploadsText: Locator;
 
   // Navigation elements
-  public readonly navigationMenu: Locator;
-  public readonly planningTab: Locator;
-  public readonly configurationTab: Locator;
-  public readonly dataManagementTab: Locator;
-  public readonly userMenu: Locator;
-  public readonly logoutButton: Locator;
+  public readonly dataManagementPageNavigationMenu: Locator;
+  public readonly dataManagementPagePlanningTab: Locator;
+  public readonly dataManagementPageConfigurationTab: Locator;
+  public readonly dataManagementPageDataManagementTab: Locator;
+  public readonly dataManagementPageUserMenu: Locator;
+  public readonly dataManagementPageLogoutButton: Locator;
 
-  // Data Management sections
-  public readonly dataManagementContainer: Locator;
-  public readonly dataManagementTabs: Locator;
-  public readonly dataImportTab: Locator;
-  public readonly dataExportTab: Locator;
-  public readonly dataBackupTab: Locator;
-  public readonly dataRestoreTab: Locator;
-  public readonly dataCleanupTab: Locator;
-  public readonly dataAnalyticsTab: Locator;
+  // Data Management sections (simplified - only used elements)
 
   // Data Import
   public readonly dataImportSection: Locator;
@@ -175,18 +167,18 @@ export class DataManagementPageLocators extends BaseLocators {
     super(page);
     
     // Page identification
-    this.pageTitle = this.page.locator('h1, .page-title, .data-management-title, [data-testid="data-management-title"]');
-    this.pageSubtitle = this.page.locator('h2, .page-subtitle, .data-management-subtitle, [data-testid="data-management-subtitle"]');
-    this.breadcrumb = this.getBreadcrumb();
-    this.fileUploadsText = this.getFileUploadsText();
+    this.dataManagementPageTitle = this.page.locator('h1, .page-title, .data-management-title, [data-testid="data-management-title"]');
+    this.dataManagementPageSubtitle = this.page.locator('h2, .page-subtitle, .data-management-subtitle, [data-testid="data-management-subtitle"]');
+    this.dataManagementPageBreadcrumb = this.getBreadcrumb();
+    this.dataManagementPageFileUploadsText = this.getFileUploadsText();
 
     // Navigation elements
-    this.navigationMenu = this.getNavigationMenu();
-    this.planningTab = this.page.locator('a:has-text("Planning"), button:has-text("Planning")');
-    this.configurationTab = this.page.locator('a:has-text("Configuration"), button:has-text("Configuration")');
-    this.dataManagementTab = this.page.locator('a:has-text("Data Management"), button:has-text("Data Management")');
-    this.userMenu = this.page.locator('.user-menu, .profile-menu, [data-testid="user-menu"]');
-    this.logoutButton = this.page.locator('button:has-text("Logout"), .logout-btn, [data-testid="logout-button"]');
+    this.dataManagementPageNavigationMenu = this.getNavigationMenu();
+    this.dataManagementPagePlanningTab = this.page.locator('a:has-text("Planning"), button:has-text("Planning")');
+    this.dataManagementPageConfigurationTab = this.page.locator('a:has-text("Configuration"), button:has-text("Configuration")');
+    this.dataManagementPageDataManagementTab = this.page.locator('a:has-text("Data Management"), button:has-text("Data Management")');
+    this.dataManagementPageUserMenu = this.page.locator('.user-menu, .profile-menu, [data-testid="user-menu"]');
+    this.dataManagementPageLogoutButton = this.page.locator('button:has-text("Logout"), .logout-btn, [data-testid="logout-button"]');
 
     // Data Management sections
     this.dataManagementContainer = this.page.locator('.data-management-container, .data-management-content, [data-testid="data-management-container"]');

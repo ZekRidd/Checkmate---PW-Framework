@@ -7,33 +7,35 @@ import { BaseLocators } from './BaseLocators';
  */
 export class LoginPageLocators extends BaseLocators {
   // Login form elements
-  public readonly usernameInput: Locator;
-  public readonly continueButton: Locator;
-  public readonly verificationCodeInput: Locator;
-  public readonly loginForm: Locator;
-  public readonly errorMessage: Locator;
-  public readonly successMessage: Locator;
+  public readonly loginPageUsernameInput: Locator;
+  public readonly loginPageContinueButton: Locator;
+  public readonly loginPagePasswordInput: Locator;
+  public readonly loginPageVerificationCodeInput: Locator;
+  public readonly loginPageForm: Locator;
+  public readonly loginPageErrorMessage: Locator;
+  public readonly loginPageSuccessMessage: Locator;
 
   // Page elements
-  public readonly pageTitle: Locator;
-  public readonly pageSubtitle: Locator;
-  public readonly logo: Locator;
+  public readonly loginPageTitle: Locator;
+  public readonly loginPageSubtitle: Locator;
+  public readonly loginPageLogo: Locator;
 
   constructor(page: Page) {
     super(page);
     
     // Login form elements
-    this.usernameInput = this.getUsernameInput();
-    this.continueButton = this.getContinueButton();
-    this.verificationCodeInput = this.getVerificationCodeInput();
-    this.loginForm = this.getForm();
-    this.errorMessage = this.getErrorMessage();
-    this.successMessage = this.getSuccessMessage();
+    this.loginPageUsernameInput = this.getUsernameInput();
+    this.loginPageContinueButton = this.getContinueButton();
+    this.loginPagePasswordInput = this.page.locator('#password, input[name="password"], input[type="password"]');
+    this.loginPageVerificationCodeInput = this.getVerificationCodeInput();
+    this.loginPageForm = this.getForm();
+    this.loginPageErrorMessage = this.getErrorMessage();
+    this.loginPageSuccessMessage = this.getSuccessMessage();
 
     // Page elements
-    this.pageTitle = this.getPageTitle();
-    this.pageSubtitle = this.getPageSubtitle();
-    this.logo = this.page.locator('img[alt*="logo"], .logo, [data-testid="logo"]');
+    this.loginPageTitle = this.getPageTitle();
+    this.loginPageSubtitle = this.getPageSubtitle();
+    this.loginPageLogo = this.page.locator('img[alt*="logo"], .logo, [data-testid="logo"]');
   }
 
   /**
@@ -41,14 +43,16 @@ export class LoginPageLocators extends BaseLocators {
    * @returns Object with locator selectors
    */
   getLocatorObject(): {
-    usernameInput: string;
-    continueButton: string;
-    verificationCodeInput: string;
+    loginPageUsernameInput: string;
+    loginPageContinueButton: string;
+    loginPagePasswordInput: string;
+    loginPageVerificationCodeInput: string;
   } {
     return {
-      usernameInput: '#username',
-      continueButton: 'button[type="submit"]:has-text("Continue")',
-      verificationCodeInput: 'input[type="text"]:not(.hide)'
+      loginPageUsernameInput: '#username',
+      loginPageContinueButton: 'button[type="submit"]:has-text("Continue")',
+      loginPagePasswordInput: '#password',
+      loginPageVerificationCodeInput: 'input[type="text"]:not(.hide)'
     };
   }
 }

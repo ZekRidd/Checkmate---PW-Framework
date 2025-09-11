@@ -18,7 +18,7 @@ export class ConfigurationPage extends BasePage {
    */
   async goToConfiguration(): Promise<this> {
     console.log('⚙️ Navigating to Configuration page...');
-    await this.configurationLocators.configurationTab.click();
+    await this.configurationLocators.configurationPageConfigurationTab.click();
     await this.waitForPageLoad(3000);
     return this;
   }
@@ -28,8 +28,8 @@ export class ConfigurationPage extends BasePage {
    * @returns this for method chaining
    */
   async verifyConfigurationPage(): Promise<this> {
-    await this.configurationLocators.storageAssetsMenuItem.waitFor({ timeout: 10000 });
-    const isStorageAssetsVisible = await this.configurationLocators.storageAssetsMenuItem.isVisible();
+    await this.configurationLocators.configurationPageStorageAssetsMenuItem.waitFor({ timeout: 10000 });
+    const isStorageAssetsVisible = await this.configurationLocators.configurationPageStorageAssetsMenuItem.isVisible();
     if (!isStorageAssetsVisible) {
       throw new Error('Configuration page verification failed - Storage Assets not visible');
     }

@@ -4,8 +4,6 @@ import { test, expect } from '@playwright/test';
 import { LoginPage, DataManagementPage } from '../src/pages';
 
 test.describe('Data Management Page Test Suite', () => {
-  // Gmail API  
-  test.describe.configure({ mode: 'serial' });
   
   let loginPage: LoginPage;
   let dataManagementPage: DataManagementPage;

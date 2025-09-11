@@ -3,10 +3,10 @@ import { environment } from './src/config/environment';
 
 export default defineConfig({
   testDir: './tests',
-  fullyParallel: false, // Gmail API kullanımı için sıralı çalıştırma
+  fullyParallel: true, // Testler paralel çalışabilir
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? environment.getMaxRetryAttempts() : 0,
-  workers: 1, // Her zaman tek worker kullan
+  workers: process.env.CI ? 1 : undefined, // CI'da tek worker, local'de otomatik
   timeout: environment.getTestTimeout(),
   reporter: [
     ['html'],

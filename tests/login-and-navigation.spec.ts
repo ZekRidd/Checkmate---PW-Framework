@@ -4,8 +4,6 @@ import { test, expect } from '@playwright/test';
 import { LoginPage, PlanningPage, ConfigurationPage, DataManagementPage } from '../src/pages';
 
 test.describe('Login and Navigation Test Suite', () => {
-  // Gmail API 
-  test.describe.configure({ mode: 'serial' });
   
   let loginPage: LoginPage;
   let planningPage: PlanningPage;
@@ -21,9 +19,9 @@ test.describe('Login and Navigation Test Suite', () => {
   });
 
   // Login Test
-  test('Should login successfully with email verification', async ({ page }) => {
-    await loginPage.loginAndVerify();
-    
+  test('Should login successfully with username/password', async ({ page }) => {
+    await loginPage.loginAndVerify(); // Default: username/password login
+  
     console.log('🎉 Login test completed successfully!');
   });
 

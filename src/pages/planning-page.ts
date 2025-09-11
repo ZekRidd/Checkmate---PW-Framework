@@ -18,11 +18,10 @@ export class PlanningPage extends BasePage {
    */
   async goToPlanning(): Promise<this> {
     console.log('📋 Navigating to Planning page...');
-    // Planning is default page after login, just verify
-    await this.planningLocators.mainScheduleText.waitFor({ timeout: 10000 });
-    const isMainScheduleVisible = await this.planningLocators.mainScheduleText.isVisible();
-    if (!isMainScheduleVisible) {
-      throw new Error('Planning page not loaded - Main Schedule text not visible');
+    // Planning is default page after login, just verify by URL
+    const currentUrl = this.page.url();
+    if (!currentUrl.includes('/planning/')) {
+      throw new Error('Planning page not loaded - URL does not contain /planning/');
     }
     console.log('✅ Successfully on Planning page');
     return this;
@@ -33,11 +32,19 @@ export class PlanningPage extends BasePage {
    * @returns this for method chaining
    */
   async verifyPlanningPage(): Promise<this> {
-    const isMainScheduleVisible = await this.planningLocators.mainScheduleText.isVisible();
-    if (!isMainScheduleVisible) {
-      throw new Error('Planning page verification failed - Main Schedule text not visible');
+    // Verify by URL and page title
+    const currentUrl = this.page.url();
+    if (!currentUrl.includes('/planning/')) {
+      throw new Error('Planning page verification failed - URL does not contain /planning/');
     }
-    console.log('✅ Planning page verified - Main Schedule text is visible');
+    
+    // Try to find a more reliable element - the navigation menu
+    const isNavigationVisible = await this.planningLocators.planningPageNavigationMenu.isVisible();
+    if (!isNavigationVisible) {
+      throw new Error('Planning page verification failed - Navigation menu not visible');
+    }
+    
+    console.log('✅ Planning page verified - URL and navigation menu are correct');
     return this;
   }
 

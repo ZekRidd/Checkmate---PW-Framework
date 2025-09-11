@@ -90,7 +90,7 @@ export abstract class BaseLocators {
   }
 
   protected getMainScheduleText(): Locator {
-    return this.page.locator('text="Main Schedule"');
+    return this.page.locator('text="Main Schedule", text="Main schedule"');
   }
 
   protected getAssetsText(): Locator {

@@ -18,7 +18,7 @@ export class DataManagementPage extends BasePage {
    */
   async goToDataManagement(): Promise<this> {
     console.log('📊 Navigating to Data Management page...');
-    await this.dataManagementLocators.dataManagementTab.click();
+    await this.dataManagementLocators.dataManagementPageDataManagementTab.click();
     await this.waitForPageLoad(3000);
     return this;
   }

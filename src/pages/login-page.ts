@@ -13,7 +13,7 @@ export class LoginPage extends BasePage {
   }
 
   /**
-   * Login to Checkmate application
+   * Login with Username and Password
    * @returns this for method chaining
    */
   async login(): Promise<this> {

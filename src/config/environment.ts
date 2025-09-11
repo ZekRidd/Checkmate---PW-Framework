@@ -41,15 +41,12 @@ class EnvironmentManager {
   getTestEmail(): string { return this.get('TEST_EMAIL'); }
   getTestUserName(): string { return this.get('TEST_USER_NAME', 'Test User'); }
   getTestUserRole(): string { return this.get('TEST_USER_ROLE', 'user'); }
-
-  // Gmail API Configuration
-  getGmailSenderEmail(): string { return this.get('GMAIL_SENDER_EMAIL'); }
-  getGmailCredentialsFile(): string { return this.get('GMAIL_CREDENTIALS_FILE', 'credentials.json'); }
-  getGmailTokenFile(): string { return this.get('GMAIL_TOKEN_FILE', 'token.json'); }
+  
+  // Username/Password Credentials
+  getUsername(): string { return this.get('USERNAME'); }
+  getPassword(): string { return this.get('PASSWORD'); }
 
   // Test Settings
-  getEmailWaitTime(): number { return this.getNumber('EMAIL_WAIT_TIME_MS', 30000); } // in milliseconds
-  getCodeWaitMinutes(): number { return this.getNumber('CODE_WAIT_MINUTES', 1); } // in minutes
   getMaxRetryAttempts(): number { return this.getNumber('MAX_RETRY_ATTEMPTS', 2); }
   getTestTimeout(): number { return this.getNumber('TEST_TIMEOUT_MS', 60000); } // in milliseconds
 
